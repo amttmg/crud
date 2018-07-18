@@ -1,0 +1,25 @@
+@extends('@layout')
+@section('content')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                {!! Form::model($@modelSingularSmall, ['route' => ['@modelPluralSmall.update', $@modelSingularSmall->id], 'method' => 'patch']) !!}
+                <div class="card-header">
+                    Edit @modelSingularCapital
+                </div>
+                <div class="card-body">
+                    @include('@modelPluralSmall.partials.form')
+                </div>
+                <div class="card-footer">
+                    <a href="{{ route('@modelPluralSmall.index') }}" class="btn btn-danger btn-sm">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </a>
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+@endsection

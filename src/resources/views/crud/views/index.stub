@@ -1,0 +1,45 @@
+@extends('app')
+@section('content')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    @modelPluralCapital List
+                    <a href="{{route('@modelPluralSmall.create')}}" class="btn btn-primary btn-sm pull-right">
+                        <i class="fa fa-plus"></i> Add New
+                    </a>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            @tableHeader
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($@modelPluralSmall as $@modelSingularSmall)
+                            <tr>
+                                @tableBody
+                                <td>
+                                    {!! Form::open(['route' => ['@modelPluralSmall.destroy', $@modelSingularSmall->id], 'method' => 'delete', 'onsubmit'=> 'return confirm(\'Do you really want to submit the form?\');']) !!}
+                                    <a href="{{ route('@modelPluralSmall.edit', $@modelSingularSmall->id) }}" class="btn btn-primary btn-sm"><i
+                                            class="fa fa-edit"></i></a>
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                                    </button>
+                                    {!! Form::close() !!}
+
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="pull-right">
+                        {{ $@modelPluralSmall->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

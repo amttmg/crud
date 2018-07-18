@@ -1,0 +1,7 @@
+<div class="form-group">
+    {!! Form::label('@fieldNameSmall', '@fieldNameCapital:', ['class' => 'control-label']) !!}
+    {!! Form::text('@fieldNameSmall', null, ['class' => 'form-control '.$errors->first('@fieldNameSmall', 'is-invalid')]) !!}
+    @if ($errors->has('@fieldNameSmall'))
+        <div class="invalid-feedback">{{ $errors->first('@fieldNameSmall') }}</div>
+    @endif
+</div>

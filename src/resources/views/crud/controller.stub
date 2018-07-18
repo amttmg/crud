@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\@modelCapitalRequest;
+use App\Services\@modelCapitalServices;
+
+/**
+ * Class @modelCapitalController
+ * @package App\Http\Controllers
+ */
+class @modelCapitalController extends Controller
+{
+    /**
+     * @var @modelCapitalServices
+     */
+    private $@modelSmallServices;
+
+    /**
+     * @modelCapitalController constructor.
+     * @param @modelCapitalServices $@modelSmallServices
+     */
+    public function __construct(@modelCapitalServices $@modelSmallServices)
+    {
+        $this->@modelSmallServices = $@modelSmallServices;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $@modelPlural = $this->@modelSmallServices->all();
+
+        return view('@modelPlural.index', compact('@modelPlural'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('@modelPlural.create');
+    }
+
+
+    /**
+     * @param @modelCapitalRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(@modelCapitalRequest $request)
+    {
+        $this->@modelSmallServices->create($request->all());
+        flash("Successfully Saved")->success();
+        return redirect()->route('@modelPlural.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $@modelSmall = $this->@modelSmallServices->find($id);
+
+        return view('@modelPlural.show', compact($@modelSmall));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $@modelSmall = $this->@modelSmallServices->find($id);
+
+        return view('@modelPlural.edit', compact('@modelSmall'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param @modelCapitalRequest $request
+     * @param  int           $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(@modelCapitalRequest $request, $id)
+    {
+        $@modelSmall = $this->@modelSmallServices->find($id);
+        $@modelSmall->update($request->all());
+        flash("Successfully Updated")->success();
+        return redirect()->route("@modelPlural.index");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $this->@modelSmallServices->destroy($id);
+        flash("Successfully Deleted")->success();
+        return redirect()->route("@modelPlural.index");
+    }
+}
+

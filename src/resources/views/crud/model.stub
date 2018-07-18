@@ -1,0 +1,17 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Class @modelCapital
+ * @package App
+ */
+class @modelCapital extends Model
+{
+    /**
+     * @var array
+     */
+    protected $fillable = [@fields];
+}

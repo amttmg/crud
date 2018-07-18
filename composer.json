@@ -1,0 +1,42 @@
+{
+    "name": "amttmg/crud",
+    "description": ":description",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amrit Tamang",
+            "email": "amt.tmg@gmail.com",
+            "homepage": "www.amrittamang.com.np"
+        }
+    ],
+    "homepage": "https://github.com/amttmg/crud",
+    "keywords": ["Laravel", "CRUD"],
+    "require": {
+        "illuminate/support": "~5",
+        "laracasts/flash": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AmtTmg\\CRUD\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AmtTmg\\CRUD\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AmtTmg\\CRUD\\CRUDServiceProvider"
+            ],
+            "aliases": {
+                "CRUD": "AmtTmg\\CRUD\\Facades\\CRUD"
+            }
+        }
+    }
+}

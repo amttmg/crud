@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Services;
+
+use AmtTmg\CRUD\services\BaseService;
+use App\@modelCapital;
+
+class @modelCapitalServices extends BaseService
+{
+    /**
+     * @var @modelCapital
+     */
+    protected $model;
+
+
+    /**
+     * @modelCapitalServices constructor.
+     * @param @modelCapital $@modelSmall
+     */
+    public function __construct(@modelCapital $@modelSmall)
+    {
+        $this->model = $@modelSmall;
+    }
+}
