@@ -1,10 +1,5 @@
 # CRUD
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
-
 This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
 
 ## Installation
@@ -17,28 +12,22 @@ $ composer require amttmg/crud
 
 ## Usage
 
-## Change log
+Step-1: Generate Crud master file. It will be located on ``app/CrudGenerate`` folder.
+``` bash
+$ php artisan make:crud ModelName
+```
+Step-2: Find the newly generated file on ``app/CrudGenerate`` folder and edit what you want. You can add fields, change validations etc.
 
-Please see the [changelog](changelog.md) for more information on what has changed recently.
-
-## Testing
+Step-3 After making crud file you have to generate ``model``, ``controller``, ``migration``, ``request`` and ``views``. to generate these files fun this command:
 
 ``` bash
-$ composer test
+$ php artisan crud:generate CrudFileClassName
 ```
+It will be replace if files are already exist.
+<br/>
+<br/>
+Thank You. Enjoy !!!
 
-## Contributing
-
-Please see [contributing.md](contributing.md) for details and a todolist.
-
-## Security
-
-If you discover any security related issues, please email author email instead of using the issue tracker.
-
-## Credits
-
-- [author name][link-author]
-- [All Contributors][link-contributors]
 
 ## License
 
