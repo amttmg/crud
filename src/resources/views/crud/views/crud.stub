@@ -1,0 +1,28 @@
+<?php
+
+namespace App\CrudGenerator;
+
+use AmtTmg\CRUD\Constants\Field;
+use AmtTmg\CRUD\Constants\Migration;
+use AmtTmg\CRUD\Services\BaseGenerator;
+
+class @modelSingularCapitalCrud implements BaseGenerator
+{
+    /**
+     * @return mixed
+     */
+    public function model()
+    {
+        return '@modelSingularCapital';
+    }
+
+    public function fields()
+    {
+        return [
+             /*['field' => "name", 'rule' => 'required', 'type' => Field::TEXT, 'migration' => Migration::STRING, 'null' => true],
+            ['field' => "address", 'rule' => 'required', 'type' => Field::TEXT, 'migration' => Migration::STRING, 'null' => false],
+            ['field' => "phone", 'rule' => 'required', 'type' => Field::TEXT, 'migration' => Migration::STRING, 'null' => true],
+            ['field' => "email", 'rule' => 'required', 'type' => Field::TEXT, 'migration' => Migration::STRING, 'null' => true],*/
+        ];
+    }
+}

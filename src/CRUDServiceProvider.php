@@ -3,6 +3,7 @@
 namespace AmtTmg\CRUD;
 
 use AmtTmg\CRUD\Commands\GenerateCrud;
+use AmtTmg\CRUD\Commands\MakeCrudFile;
 use Illuminate\Support\ServiceProvider;
 
 class CRUDServiceProvider extends ServiceProvider
@@ -44,7 +45,7 @@ class CRUDServiceProvider extends ServiceProvider
 
             // Registering package commands.
             $this->commands([
-                GenerateCrud::class,
+                GenerateCrud::class, MakeCrudFile::class
             ]);
         }
     }
