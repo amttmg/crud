@@ -28,11 +28,23 @@ class ViewService
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
+        if (config('crud.use_default_template')) {
+            $path = __DIR__.'/../resources';
+        } else {
+            $path = resource_path();
+        }
+        $this->layout        = config('crud.view_template');
+        $this->createStubUrl = $path.'/views/crud/views/create.stub';
+        $this->editStubUrl   = $path.'/views/crud/views/edit.stub';
+        $this->indexStubUrl  = $path.'/views/crud/views/index.stub';
+        $this->formStubUrl   = $path.'/views/crud/views/form.stub';
+
+        $this->inputText = $path.'/views/crud/views/inputs/text.stub';
     }
 
     private function getViewPath($model, $fileName)
     {
-        $viewPath = config('view.paths')[0].'/'.strtolower(str_plural($model));
+        $viewPath = config('view.paths')[0].'/'.config('crud.view_path').strtolower(str_singular($model));
         if (!$this->filesystem->exists($viewPath)) {
             $this->filesystem->makeDirectory($viewPath);
             if (!$this->filesystem->exists($viewPath.'/partials')) {
@@ -49,7 +61,8 @@ class ViewService
         foreach ($fields as $field) {
             if ($field['type'] == Field::TEXT) {
                 $template = $this->filesystem->get($this->inputText);
-                $temp     .= str_replace(['@fieldNameSmall', '@fieldNameCapital'], [strtolower($field['field']), ucfirst($field['field'])], $template);
+                $temp     .= str_replace(['@fieldNameSmall', '@fieldNameCapital'],
+                    [strtolower($field['field']), ucfirst($field['field'])], $template);
             }
         }
 
@@ -59,28 +72,32 @@ class ViewService
     public function makeCreateView($model)
     {
         $template = $this->filesystem->get($this->createStubUrl);
-        $template = Helper::replaceKeyWords($template, $model, ['@layout' => $this->layout]);
+        $template = Helper::replaceKeyWords($template, $model, null, null, ['@layout' => $this->layout]);
         $this->filesystem->put($this->getViewPath($model, 'create.blade.php'), $template);
     }
 
     public function makeEditView($model)
     {
         $template = $this->filesystem->get($this->editStubUrl);
-        $template = Helper::replaceKeyWords($template, $model, ['@layout' => $this->layout]);
+        $template = Helper::replaceKeyWords($template, $model, null, null, ['@layout' => $this->layout]);
         $this->filesystem->put($this->getViewPath($model, 'edit.blade.php'), $template);
     }
 
     public function makeFormView($model, $fields)
     {
         $template = $this->filesystem->get($this->formStubUrl);
-        $template = Helper::replaceKeyWords($template, $model, ['@fields' => $this->generateFieldsForForm($fields)]);
-        $this->filesystem->put($this->getViewPath($model, 'partials/form.blade.php'), $template);
+        $template = Helper::replaceKeyWords($template, $model, $this->generateFieldsForForm($fields));
+        $this->filesystem->put($this->getViewPath($model, '_form.blade.php'), $template);
     }
 
     public function makeIndexView($model, $fields)
     {
         $template = $this->filesystem->get($this->indexStubUrl);
-        $template = Helper::replaceKeyWords($template, $model, ['@layout' => $this->layout, '@tableHeader' => Helper::getTableHeaders($fields), '@tableBody' => Helper::getTableBody($model, $fields)]);
+        $template = Helper::replaceKeyWords($template, $model, null, null, [
+            '@layout'      => $this->layout,
+            '@tableHeader' => Helper::getTableHeaders($fields),
+            '@tableBody'   => Helper::getTableBody($model, $fields),
+        ]);
         $this->filesystem->put($this->getViewPath($model, 'index.blade.php'), $template);
     }
 }

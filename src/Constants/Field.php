@@ -8,5 +8,6 @@ namespace AmtTmg\CRUD\Constants;
  */
 class Field
 {
-    const TEXT = 'text';
+    const TEXT   = 'text';
+    const NUMBER = 'number';
 }

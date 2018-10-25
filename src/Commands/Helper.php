@@ -5,18 +5,22 @@ namespace AmtTmg\CRUD\Commands;
 
 class Helper
 {
-    public static function replaceKeyWords($template, $model, $replaces = [])
+    public static function replaceKeyWords($template, $model, $fields = '', $namespace = '', $replaces = [])
     {
         $template = str_replace([
             '@modelSingularCapital',
             '@modelSingularSmall',
             '@modelPluralCapital',
             '@modelPluralSmall',
+            '@fields',
+            '@namespace',
         ], [
             str_singular(ucfirst($model)),
             str_singular(strtolower($model)),
             str_plural(ucfirst($model)),
             str_plural(strtolower($model)),
+            $fields,
+            $namespace,
         ], $template);
 
         foreach ($replaces as $key => $value) {
